@@ -6,10 +6,11 @@ on:
     branches: [ main, master ]
   schedule:
     - cron: '0 0 * * *'
+  workflow_dispatch:
 jobs:
   smoke:
     name: Smoke Tests
-    if: github.event_name != 'schedule'
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +33,7 @@ jobs:
 
   regression:
     name: Regression Tests
-    if: github.event_name == 'schedule'
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
