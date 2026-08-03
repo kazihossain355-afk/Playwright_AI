@@ -4,9 +4,12 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+  schedule:
+    - cron: '0 0 * * *'
 jobs:
   smoke:
     name: Smoke Tests
+    if: github.event_name != 'schedule'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -29,7 +32,7 @@ jobs:
 
   regression:
     name: Regression Tests
-    needs: smoke
+    if: github.event_name == 'schedule'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
