@@ -1,9 +1,14 @@
 {
   "name": "playwright_ai",
   "version": "1.0.0",
-  "description": "",
+  "description": "Playwright end-to-end tests",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "test:chromium": "playwright test --project=chromium",
+    "test:smoke": "playwright test --grep @smoke",
+    "report": "playwright show-report"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
